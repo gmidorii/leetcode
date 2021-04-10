@@ -50,8 +50,11 @@ func longestPalindrome(s string) string {
 		rev[len(s)-i-1] = c
 	}
 	rs := []rune(s)
-	results := []string{}
+	var res string
 	for i := range rs {
+		if len(res) >= len(rs)-i {
+			return res
+		}
 		for j := range rev {
 			if rs[i] == rev[j] {
 				ans := []rune{rs[i]}
@@ -59,12 +62,16 @@ func longestPalindrome(s string) string {
 				for {
 					if len(rev)-(j+x)-1 == i {
 						ans = append(ans, rs[i+x])
-						results = append(results, string(ans))
+						if len(ans) > len(res) {
+							res = string(ans)
+						}
 						break
 					}
 					if j+x >= len(rev)-1 {
 						if len(ans) == 1 {
-							results = append(results, string(ans))
+							if len(ans) > len(res) {
+								res = string(ans)
+							}
 						}
 						break
 					}
@@ -79,12 +86,6 @@ func longestPalindrome(s string) string {
 					break
 				}
 			}
-		}
-	}
-	var res string
-	for _, result := range results {
-		if len(result) > len(res) {
-			res = result
 		}
 	}
 	return res
