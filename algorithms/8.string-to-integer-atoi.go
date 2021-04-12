@@ -115,48 +115,98 @@ Since -91283472332 is less than the lower bound of the range [-2<sup>31</sup>, 2
  * "42"
 **/
 var digits = []rune{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
+var digitsMap = map[rune]int{
+	'0': 0,
+	'1': 1,
+	'2': 2,
+	'3': 3,
+	'4': 4,
+	'5': 5,
+	'6': 6,
+	'7': 7,
+	'8': 8,
+	'9': 9,
+}
 
 func myAtoi(s string) int {
-	sign := 0
-	first := false
+	sign := +1
+	first := true
 	resRune := []rune{}
 	for _, c := range s {
-		if !first {
+		if first {
+			if c == ' ' {
+				continue
+			}
+			if c == '+' {
+				sign = +1
+				first = false
+				continue
+			}
+			if c == '-' {
+				sign = -1
+				first = false
+				continue
+			}
 			if !isDigits(c) {
 				return 0
 			}
 			resRune = append(resRune, c)
-			first = true
+			first = false
 			continue
 		}
+
 		if isDigits(c) {
 			resRune = append(resRune, c)
 			continue
 		}
-		if c == ' ' {
-			continue
-		}
-		if c == '+' {
-			sign = +1
-		}
-		if c == '-' {
-			sign = -1
-		}
+		break
 	}
 
 	if len(resRune) == 0 {
 		return 0
 	}
 
+	max := 1
+	for i := 0; i < 31; i++ {
+		max = max * 2
+	}
+
 	numDigits := len(resRune)
+	res := 0
 	for _, r := range resRune {
 		d := 1
+		// XXX: 乗数が int 最大数を超えるためエラーとなる
 		for i := 0; i < numDigits-1; i++ {
 			d = d * 10
 		}
+		if res != 0 && digitsMap[r] == 0 {
+			res = res + d
+		} else {
+			res = res + d*digitsMap[r]
+		}
+		numDigits = numDigits - 1
+		if res < 0 {
+			if sign > 0 {
+				return max - 1
+			} else {
+				return -max
+			}
+		}
 	}
 
-	return 0 * sign
+	resSign := res * sign
+
+	if resSign > 0 {
+		if resSign > max-1 {
+			return max - 1
+		}
+	} else {
+		if resSign < -max {
+			return -max
+		}
+	}
+
+	return resSign
 }
 
 func isDigits(c rune) bool {
