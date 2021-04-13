@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 /**
  * <p>Implement the <code>myAtoi(string s)</code> function, which converts a string to a 32-bit signed integer (similar to C/C++&#39;s <code>atoi</code> function).</p>
 
@@ -150,12 +152,18 @@ func myAtoi(s string) int {
 			if !isDigits(c) {
 				return 0
 			}
-			resRune = append(resRune, c)
 			first = false
+			if c == '0' {
+				continue
+			}
+			resRune = append(resRune, c)
 			continue
 		}
 
 		if isDigits(c) {
+			if len(resRune) == 0 && c == '0' {
+				continue
+			}
 			resRune = append(resRune, c)
 			continue
 		}
@@ -172,19 +180,27 @@ func myAtoi(s string) int {
 	}
 
 	numDigits := len(resRune)
+	fmt.Println(string(resRune))
 	res := 0
 	for _, r := range resRune {
 		d := 1
-		// XXX: 乗数が int 最大数を超えるためエラーとなる
 		for i := 0; i < numDigits-1; i++ {
 			d = d * 10
+			if d > max {
+				if sign > 0 {
+					return max - 1
+				} else {
+					return -max
+				}
+			}
 		}
-		if res != 0 && digitsMap[r] == 0 {
-			res = res + d
-		} else {
-			res = res + d*digitsMap[r]
-		}
+
 		numDigits = numDigits - 1
+		if digitsMap[r] == 0 {
+			continue
+		}
+		res = res + d*digitsMap[r]
+
 		if res < 0 {
 			if sign > 0 {
 				return max - 1
@@ -192,6 +208,7 @@ func myAtoi(s string) int {
 				return -max
 			}
 		}
+
 	}
 
 	resSign := res * sign

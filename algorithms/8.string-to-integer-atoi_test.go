@@ -55,6 +55,26 @@ func Test_myAtoi(t *testing.T) {
 			args: args{s: "-000000000000000000000000000000000000000000000000001"},
 			want: -1,
 		},
+		{
+			args: args{s: "  0000000000012345678"},
+			want: 12345678,
+		},
+		{
+			args: args{s: "00000-42a1234"},
+			want: 0,
+		},
+		{
+			args: args{s: "010"},
+			want: 10,
+		},
+		{
+			args: args{s: "     +004500"},
+			want: 4500,
+		},
+		{
+			args: args{s: "+00131204"},
+			want: 131204,
+		},
 	}
 	for _, tt := range tests {
 		if got := myAtoi(tt.args.s); got != tt.want {
