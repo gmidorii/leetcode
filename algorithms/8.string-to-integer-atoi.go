@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 /**
  * <p>Implement the <code>myAtoi(string s)</code> function, which converts a string to a 32-bit signed integer (similar to C/C++&#39;s <code>atoi</code> function).</p>
 
@@ -180,7 +178,6 @@ func myAtoi(s string) int {
 	}
 
 	numDigits := len(resRune)
-	fmt.Println(string(resRune))
 	res := 0
 	for _, r := range resRune {
 		d := 1
