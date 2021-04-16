@@ -11,6 +11,9 @@ func maxArea(height []int) int {
 	max := 0
 	l := len(height)
 	for i, v := range height {
+		if max > (l-(i+1))*v {
+			continue
+		}
 		for j, rv := range rHeight {
 			if i+j >= l {
 				break
