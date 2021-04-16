@@ -34,3 +34,33 @@ func maxArea(height []int) int {
 
 	return max
 }
+
+func maxArea_2(height []int) int {
+	leftIdx := 0
+	rightIdx := len(height) - 1
+	max := 0
+	for {
+		if leftIdx == rightIdx {
+			break
+		}
+		lh := height[leftIdx]
+		rh := height[rightIdx]
+		w := rightIdx - leftIdx
+		if lh > rh {
+			area := rh * w
+			if area > max {
+				max = area
+			}
+			rightIdx = rightIdx - 1
+			continue
+		} else {
+			area := lh * w
+			if area > max {
+				max = area
+			}
+			leftIdx = leftIdx + 1
+			continue
+		}
+	}
+	return max
+}

@@ -36,5 +36,9 @@ func Test_maxArea(t *testing.T) {
 		if got := maxArea(tt.args.height); got != tt.want {
 			t.Errorf("%q. maxArea() = %v, want %v", tt.name, got, tt.want)
 		}
+
+		if got := maxArea_2(tt.args.height); got != tt.want {
+			t.Errorf("%q. maxArea() = %v, want %v", tt.name, got, tt.want)
+		}
 	}
 }
