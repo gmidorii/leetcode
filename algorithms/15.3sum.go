@@ -13,15 +13,12 @@ func threeSum(nums []int) [][]int {
 	copy(ys, nums)
 	copy(zs, nums)
 
-	initXi := 0
-	initYi := 1
-	initZi := 2
 	var result [][]int
-	m := func(x, y, z int, result [][]int) bool {
+	m := func(x, y, z int, res [][]int) bool {
 		xm := false
 		ym := false
 		zm := false
-		for _, rr := range result {
+		for _, rr := range res {
 			for _, r := range rr {
 				if !xm && r == x {
 					xm = true
@@ -36,22 +33,26 @@ func threeSum(nums []int) [][]int {
 					continue
 				}
 			}
+			if xm && ym && zm {
+				return true
+			}
+			xm = false
+			ym = false
+			zm = false
 		}
-		if xm && ym && zm {
-			return true
-		}
+
 		return false
 	}
-	for xi := initXi; xi < len(nums); xi++ {
-		for yi := initYi; yi < len(nums); yi++ {
-			for zi := initZi; zi < len(nums); zi++ {
-				if (nums[xi]+nums[yi]+nums[zi]) == 0 && !m(nums[xi], nums[yi], nums[zi], result) {
-					result = append(result, []int{nums[xi], nums[yi], nums[zi]})
+	for xi := 0; xi < len(nums); xi++ {
+		for yi := xi + 1; yi < len(nums); yi++ {
+			for zi := yi + 1; zi < len(nums); zi++ {
+				if (nums[xi] + nums[yi] + nums[zi]) == 0 {
+					if !m(nums[xi], nums[yi], nums[zi], result) {
+						result = append(result, []int{nums[xi], nums[yi], nums[zi]})
+					}
 				}
 			}
-			initZi = initZi + 1
 		}
-		initYi = initZi + 1
 	}
 	return result
 }
