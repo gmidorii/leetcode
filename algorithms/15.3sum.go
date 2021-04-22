@@ -32,6 +32,7 @@ func threeSum(nums []int) [][]int {
 					zm = true
 					continue
 				}
+				break
 			}
 			if xm && ym && zm {
 				return true
@@ -43,13 +44,38 @@ func threeSum(nums []int) [][]int {
 
 		return false
 	}
+	mm := func(x, y int, res [][]int) bool {
+		xm := false
+		ym := false
+		for _, rr := range res {
+			for _, r := range rr {
+				if !xm && r == x {
+					xm = true
+					continue
+				}
+				if !ym && r == y {
+					ym = true
+					continue
+				}
+				break
+			}
+			if xm && ym {
+				return true
+			}
+			xm = false
+			ym = false
+		}
+		return false
+	}
 	for xi := 0; xi < len(nums); xi++ {
 		for yi := xi + 1; yi < len(nums); yi++ {
+			if mm(nums[xi], nums[yi], result) {
+				continue
+			}
 			for zi := yi + 1; zi < len(nums); zi++ {
-				if (nums[xi] + nums[yi] + nums[zi]) == 0 {
-					if !m(nums[xi], nums[yi], nums[zi], result) {
-						result = append(result, []int{nums[xi], nums[yi], nums[zi]})
-					}
+				if (nums[xi]+nums[yi]+nums[zi]) == 0 && !m(nums[xi], nums[yi], nums[zi], result) {
+					result = append(result, []int{nums[xi], nums[yi], nums[zi]})
+					break
 				}
 			}
 		}
