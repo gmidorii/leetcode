@@ -52,7 +52,7 @@ func Test_threeSum(t *testing.T) {
 	}
 	for _, tt := range tests {
 		if got := threeSum(tt.args.nums); !reflect.DeepEqual(got, tt.want) {
-			t.Errorf("%v. threeSum() = %v, want %v", tt.args.nums, got, tt.want)
+			t.Errorf("threeSum() = %v, want %v", got, tt.want)
 		}
 	}
 }
