@@ -1,25 +1,14 @@
 package main
 
 func threeSum(nums []int) [][]int {
-	xs := make([]int, len(nums))
-	ys := make([]int, len(nums))
-	zs := make([]int, len(nums))
-
 	if len(nums) <= 2 {
 		return [][]int{}
 	}
-
-	copy(xs, nums)
-	copy(ys, nums)
-	copy(zs, nums)
 
 	var result [][]int
 	for xi := 0; xi < len(nums); xi++ {
 		for yi := xi + 1; yi < len(nums); yi++ {
 			zn := -1 * (nums[xi] + nums[yi])
-			// if m(nums[xi], nums[yi], zn, result) {
-			// 	continue
-			// }
 			for zi := yi + 1; zi < len(nums); zi++ {
 				if zn == nums[zi] {
 					result = append(result, []int{nums[xi], nums[yi], nums[zi]})
@@ -29,7 +18,6 @@ func threeSum(nums []int) [][]int {
 		}
 	}
 
-	// TOCO: result の重複除去のほうが検索回数が少なくなるのでは
 	var res [][]int
 	for _, rr := range result {
 		if !match(rr[0], rr[1], rr[2], res) {
