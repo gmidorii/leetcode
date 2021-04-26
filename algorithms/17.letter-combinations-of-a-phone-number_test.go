@@ -34,5 +34,8 @@ func Test_letterCombinations(t *testing.T) {
 		if got := letterCombinations(tt.args.digits); !reflect.DeepEqual(got, tt.want) {
 			t.Errorf("%q. letterCombinations() = %v, want %v", tt.name, got, tt.want)
 		}
+		if got := letterCombinations2(tt.args.digits); !reflect.DeepEqual(got, tt.want) {
+			t.Errorf("%q. letterCombinations() = %v, want %v", tt.name, got, tt.want)
+		}
 	}
 }
