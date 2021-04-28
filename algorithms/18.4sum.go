@@ -13,6 +13,54 @@ func fourSum(nums []int, target int) [][]int {
 			}
 		}
 	}
-	//TODO: fix duplicate
+
+	return distinct(res)
+}
+
+func distinct(src [][]int) [][]int {
+	ts := make([][]int, len(src))
+	copy(ts, src)
+	ngList := make([]bool, len(src))
+	for i, s := range src {
+		if ngList[i] {
+			continue
+		}
+		for j, t := range ts {
+			if i == j {
+				continue
+			}
+			if matchNoOrder(s, t) {
+				ngList[j] = true
+			}
+		}
+	}
+	var res [][]int
+	for i, ng := range ngList {
+		if !ng {
+			res = append(res, src[i])
+		}
+	}
 	return res
+}
+
+func matchNoOrder(ss []int, tt []int) bool {
+	if len(ss) != len(tt) {
+		return false
+	}
+	var tmp []int
+	for _, s := range ss {
+		m := false
+		for _, t := range tt {
+			if !m && s == t {
+				m = true
+				continue
+			}
+			if m || s != t {
+				tmp = append(tmp, t)
+			}
+		}
+		tt = tmp
+		tmp = []int{}
+	}
+	return len(tt) == 0
 }
