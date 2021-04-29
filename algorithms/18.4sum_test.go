@@ -43,6 +43,9 @@ func Test_fourSum(t *testing.T) {
 		if got := fourSum(tt.args.nums, tt.args.target); !matchSliceOnSlice(tt.want, got) {
 			t.Errorf("%q. fourSum() = %v, want %v", tt.name, got, tt.want)
 		}
+		if got := fourSum2(tt.args.nums, tt.args.target); !matchSliceOnSlice(tt.want, got) {
+			t.Errorf("%q. fourSum2() = %v, want %v", tt.name, got, tt.want)
+		}
 	}
 }
 
