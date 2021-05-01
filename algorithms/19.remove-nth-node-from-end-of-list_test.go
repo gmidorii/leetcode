@@ -15,11 +15,81 @@ func Test_removeNthFromEnd(t *testing.T) {
 		args args
 		want *ListNode
 	}{
-		// TODO: Add test cases.
+		{
+			name: "1",
+			args: args{
+				head: &ListNode{
+					Val: 1,
+					Next: &ListNode{
+						Val: 2,
+						Next: &ListNode{
+							Val: 3,
+							Next: &ListNode{
+								Val: 4,
+								Next: &ListNode{
+									Val:  5,
+									Next: nil,
+								},
+							},
+						},
+					},
+				},
+				n: 2,
+			},
+			want: &ListNode{
+				Val: 1,
+				Next: &ListNode{
+					Val: 2,
+					Next: &ListNode{
+						Val: 3,
+						Next: &ListNode{
+							Val:  5,
+							Next: nil,
+						},
+					},
+				},
+			},
+		},
+		{
+			name: "2",
+			args: args{
+				head: &ListNode{
+					Val:  1,
+					Next: nil,
+				},
+				n: 1,
+			},
+			want: nil,
+		},
+		{
+			name: "3",
+			args: args{
+				head: &ListNode{
+					Val: 5,
+					Next: &ListNode{
+						Val:  2,
+						Next: nil,
+					},
+				},
+				n: 1,
+			},
+			want: &ListNode{
+				Val:  5,
+				Next: nil,
+			},
+		},
 	}
 	for _, tt := range tests {
 		if got := removeNthFromEnd(tt.args.head, tt.args.n); !reflect.DeepEqual(got, tt.want) {
 			t.Errorf("%q. removeNthFromEnd() = %v, want %v", tt.name, got, tt.want)
+			// count := 0
+			for {
+				if got.Next == nil {
+					break
+				}
+				t.Log(got.Val)
+				got = got.Next
+			}
 		}
 	}
 }
