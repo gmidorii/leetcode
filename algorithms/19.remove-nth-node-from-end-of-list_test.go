@@ -80,16 +80,11 @@ func Test_removeNthFromEnd(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		if got := removeNthFromEnd(tt.args.head, tt.args.n); !reflect.DeepEqual(got, tt.want) {
-			t.Errorf("%q. removeNthFromEnd() = %v, want %v", tt.name, got, tt.want)
-			// count := 0
-			for {
-				if got.Next == nil {
-					break
-				}
-				t.Log(got.Val)
-				got = got.Next
-			}
+		// if got := removeNthFromEnd(tt.args.head, tt.args.n); !reflect.DeepEqual(got, tt.want) {
+		// 	t.Errorf("%q. removeNthFromEnd() = %v, want %v", tt.name, got, tt.want)
+		// }
+		if got := removeNthFromEnd2(tt.args.head, tt.args.n); !reflect.DeepEqual(got, tt.want) {
+			t.Errorf("%q. removeNthFromEnd2() = %v, want %v", tt.name, got, tt.want)
 		}
 	}
 }
