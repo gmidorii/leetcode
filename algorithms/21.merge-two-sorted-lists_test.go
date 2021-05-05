@@ -125,7 +125,7 @@ func Test_mergeTwoLists(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		if got := mergeTwoLists(tt.args.l1, tt.args.l2); !reflect.DeepEqual(got, tt.want) {
+		if got := mergeTwoLists2(tt.args.l1, tt.args.l2); !reflect.DeepEqual(got, tt.want) {
 			var index int
 			for {
 				if got == nil && tt.want == nil {
