@@ -2,33 +2,38 @@ package main
 
 func swapPairs(head *ListNode) *ListNode {
 	num := 0
-	var grandParent *ListNode
 	var parent *ListNode
-	var child *ListNode
-	node := head
+	if head == nil || head.Next == nil {
+		return head
+	}
+	p := head
+	c := head.Next
+	gc := head.Next.Next
+	head = c
+	head.Next = p
+	head.Next.Next = gc
+	grandParent := head.Next
+	node := head.Next.Next
 	for {
 		if node == nil {
+			if parent != nil {
+
+			}
 			break
 		}
-		if num%2 == 1 {
+		if num%2 == 0 {
 			parent = node
-			node = node.Next
-			continue
 		} else {
-			child = node
-			if grandParent == nil {
-				grandChild := child.Next
-				child.Next = parent
-				parent.Next = grandChild
-				grandParent = child
-			} else {
-				grandChild := child.Next
-				child.Next = parent
-				grandParent.Next = child
-				parent.Next = grandChild
-			}
-			node = node.Next
+			child := *node
+			gc := child.Next
+			grandParent.Next = &child
+			grandParent.Next.Next = parent
+			grandParent.Next.Next.Next = gc
+			grandParent = parent
+			parent = nil
 		}
+		node = node.Next
+		num++
 	}
 	return head
 }
