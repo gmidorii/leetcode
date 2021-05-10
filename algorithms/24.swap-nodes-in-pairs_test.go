@@ -89,7 +89,7 @@ func Test_swapPairs(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		if got := swapPairs(tt.args.head); !reflect.DeepEqual(got, tt.want) {
+		if got := swapPairs2(tt.args.head); !reflect.DeepEqual(got, tt.want) {
 			t.Errorf("%q. swapPairs() = %v, want %v", tt.name, got, tt.want)
 			var index int
 			for {

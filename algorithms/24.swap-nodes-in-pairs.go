@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func swapPairs(head *ListNode) *ListNode {
 	num := 0
 	var parent *ListNode
@@ -49,19 +51,24 @@ func swapPairs2(head *ListNode) *ListNode {
 		if behind != nil && behind.Next != nil {
 			behind.Next = headNext
 		}
-		var next *ListNode
+		var headNextNext *ListNode
 		if head.Next.Next != nil {
-			next = head.Next.Next
+			headNextNext = head.Next.Next
 		}
-		if head.Next.Next != nil {
-			head.Next = next
-		} else {
-			head.Next = nil
-		}
+		head.Next = headNextNext
 		headNext.Next = head
+		behind = head
 		if head.Next != nil {
-			head = next
+			head = headNextNext
 		}
 	}
 	return s
+}
+
+func printListNode(n *ListNode) {
+	for n != nil {
+		fmt.Printf("%v, ", n.Val)
+		n = n.Next
+	}
+	fmt.Println("")
 }
