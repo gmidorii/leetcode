@@ -38,7 +38,7 @@ func Test_removeDuplicates(t *testing.T) {
 		t.Log(before)
 		t.Log(n)
 		t.Log(tt.args.nums)
-		if got := removeDuplicates(tt.args.nums); got != tt.want {
+		if got := removeDuplicates2(tt.args.nums); got != tt.want {
 			t.Errorf("%q. removeDuplicates() = %v, want %v", tt.name, got, tt.want)
 		}
 		if !reflect.DeepEqual(tt.args.nums, tt.wantNums) {
