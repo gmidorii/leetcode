@@ -68,6 +68,13 @@ func Test_divide(t *testing.T) {
 			},
 			want: -2147483648,
 		},
+		{
+			args: args{
+				dividend: -2147483648,
+				divisor:  -3,
+			},
+			want: 715827882,
+		},
 	}
 	for _, tt := range tests {
 		if got := divide(tt.args.dividend, tt.args.divisor); got != tt.want {
