@@ -80,5 +80,8 @@ func Test_divide(t *testing.T) {
 		if got := divide(tt.args.dividend, tt.args.divisor); got != tt.want {
 			t.Errorf("%v. divide() = %v, want %v", tt.args.dividend, got, tt.want)
 		}
+		if got := divide1(tt.args.dividend, tt.args.divisor); got != tt.want {
+			t.Errorf("%v/%v. divide1() = %v, want %v", tt.args.dividend, tt.args.divisor, got, tt.want)
+		}
 	}
 }
