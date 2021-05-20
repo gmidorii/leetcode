@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"math"
 )
 
@@ -71,13 +70,9 @@ func divide1(divided int, divisor int) int {
 	for dvd >= dvs {
 		temp := dvs
 		m := 1
-		fmt.Printf("temp: %v\n", temp)
-		fmt.Printf("m: %v\n", m)
 		for temp<<1 <= dvd {
 			temp <<= 1
 			m <<= 1
-			fmt.Printf("temp: %v\n", temp)
-			fmt.Printf("m: %v\n", m)
 		}
 		dvd -= temp
 		result += m
