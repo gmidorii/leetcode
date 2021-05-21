@@ -2,18 +2,11 @@ package main
 
 import "fmt"
 
-var l map[int]string = map[int]string{
-	1:  "one",
-	2:  "two",
-	3:  "three",
-	4:  "four",
-	5:  "five",
-	6:  "six",
-	7:  "seven",
-	8:  "eight",
-	9:  "nine",
-	10: "ten",
-}
+/*
+1. 末尾から順番に比較して若いほうが小さい値の場合は入れ替えて返却
+2. 先頭との比較で先頭のほうが小さい場合は、先頭の値より最も近く大きい値と入れ替えて、小さい順にソート
+3. 先頭との比較で先頭のほうが大きい場合は、逆順にして返却
+*/
 
 func nextPermutation(nums []int) {
 	lastIdx := len(nums) - 1
