@@ -77,6 +77,13 @@ func Test_nextPermutation(t *testing.T) {
 			},
 			want: []int{5, 1, 1},
 		},
+		{
+			name: "",
+			args: args{
+				nums: []int{2, 2, 7, 5, 4, 3, 2, 2, 1},
+			},
+			want: []int{2, 3, 1, 2, 2, 2, 4, 5, 7},
+		},
 	}
 	for _, tt := range tests {
 		nextPermutation(tt.args.nums)

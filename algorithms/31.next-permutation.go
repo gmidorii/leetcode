@@ -1,38 +1,22 @@
 package main
 
-/*
-1. 末尾から順番に比較して若いほうが小さい値の場合は入れ替えて返却
-2. 先頭との比較で先頭のほうが小さい場合は、先頭の値より最も近く大きい値と入れ替えて、小さい順にソート
-3. 先頭との比較で先頭のほうが大きい場合は、逆順にして返却
-*/
-
 func nextPermutation(nums []int) {
 	if len(nums) <= 1 {
 		return
 	}
-	first := nums[0]
-	max := 101
-	maxIdx := len(nums) - 1
-	maxNext := 101
-	maxNextIdx := len(nums) - 1
 	lastIdx := len(nums) - 1
 	for i := lastIdx; i > 0; i-- {
-		if nums[i] >= first {
-			if nums[i] < max {
-				maxNext = max
-				maxNextIdx = maxIdx
-				max = nums[i]
-				maxIdx = i
-			} else if nums[i] < maxNext {
-				maxNext = nums[i]
-				maxNextIdx = i
-			}
-		}
 		if nums[i] > nums[i-1] {
-			if i == 1 && nums[i] == max {
-				nums[i-1], nums[maxNextIdx] = swap(nums[i-1], nums[maxNextIdx])
-				sortSkipIdx(nums, i)
-				return
+			max := 101
+			maxIdx := -1
+			for j := (i - 1) + 1; j < len(nums); j++ {
+				if nums[j] <= nums[i-1] {
+					continue
+				}
+				if nums[j] < max {
+					max = nums[j]
+					maxIdx = j
+				}
 			}
 			nums[i-1], nums[maxIdx] = swap(nums[i-1], nums[maxIdx])
 			sortSkipIdx(nums, i)
