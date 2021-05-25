@@ -24,5 +24,8 @@ func Test_search(t *testing.T) {
 		if got := search(tt.args.nums, tt.args.target); got != tt.want {
 			t.Errorf("%q. search() = %v, want %v", tt.name, got, tt.want)
 		}
+		if got := search33(tt.args.nums, tt.args.target); got != tt.want {
+			t.Errorf("%q. search() = %v, want %v", tt.name, got, tt.want)
+		}
 	}
 }
