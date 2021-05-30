@@ -29,10 +29,10 @@ func searchInsert2(nums []int, target int) int {
 		if target > nums[mid] && target <= nums[midP] {
 			return midP
 		}
-		if midP == len(nums)-1 {
+		if midP == len(nums)-1 && target > nums[midP] {
 			return len(nums)
 		}
-		if mid == 0 {
+		if mid == 0 && target <= nums[mid] {
 			return 0
 		}
 		if nums[mid] < target {
