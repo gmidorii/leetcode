@@ -15,7 +15,52 @@ func Test_combinationSum(t *testing.T) {
 		args args
 		want [][]int
 	}{
-		// TODO: Add test cases.
+		{
+			args: args{
+				candidates: []int{2, 3, 6, 7},
+				target:     7,
+			},
+			want: [][]int{
+				{2, 2, 3},
+				{7},
+			},
+		},
+		{
+			args: args{
+				candidates: []int{2, 3, 5},
+				target:     8,
+			},
+			want: [][]int{
+				{2, 2, 2, 2},
+				{2, 3, 3},
+				{3, 5},
+			},
+		},
+		{
+			args: args{
+				candidates: []int{2},
+				target:     1,
+			},
+			want: [][]int{},
+		},
+		{
+			args: args{
+				candidates: []int{1},
+				target:     1,
+			},
+			want: [][]int{
+				{1},
+			},
+		},
+		{
+			args: args{
+				candidates: []int{1},
+				target:     2,
+			},
+			want: [][]int{
+				{1, 1},
+			},
+		},
 	}
 	for _, tt := range tests {
 		if got := combinationSum(tt.args.candidates, tt.args.target); !reflect.DeepEqual(got, tt.want) {
