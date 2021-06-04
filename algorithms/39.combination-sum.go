@@ -1,21 +1,34 @@
 package main
 
 func combinationSum(candidates []int, target int) [][]int {
-	var res [][]int
+	var combinations [][]int
 	for i := 0; i < len(candidates); i++ {
 		c := candidates[i]
 		if c > target {
 			continue
 		}
-		if c == target {
-			res = append(res, []int{c})
-			continue
+		var itmp [][]int
+		itmp = append(itmp, []int{c})
+		for j := i + 1; j < len(candidates); j++ {
+			cj := candidates[j]
+			if cj > target {
+				continue
+			}
+			jtmp := make([][]int, 0, len(itmp))
+			jtmp = append(jtmp, itmp...)
+			for _, r := range itmp {
+				jtmp = append(jtmp, append(r, cj))
+			}
+			itmp = jtmp
 		}
-
-		// 足して割れるかを順に計算する
-		// a+b, a*2+b, a+b*2 で割って 0 になれば良い
-		// a+b+c, a*2+b+c, a+b*2+c, a+b+c*2 ...
-		// 組み合わせをどうやって絞るか検討
+		combinations = append(combinations, itmp...)
 	}
-	return res
+
+	// var res [][]int
+	// for _, items := range combinations {
+	// 	if c == target {
+	// 		res = append(res, []int{c})
+	// 	}
+	// }
+	return combinations
 }
