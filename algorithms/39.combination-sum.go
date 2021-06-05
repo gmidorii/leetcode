@@ -24,11 +24,18 @@ func combinationSum(candidates []int, target int) [][]int {
 		combinations = append(combinations, itmp...)
 	}
 
-	// var res [][]int
-	// for _, items := range combinations {
-	// 	if c == target {
-	// 		res = append(res, []int{c})
-	// 	}
-	// }
-	return combinations
+	var res [][]int
+	for _, items := range combinations {
+		for {
+			var sum int
+			for _, item := range items {
+				sum += item
+			}
+			if sum == target {
+				res = append(res, items)
+			}
+			break
+		}
+	}
+	return res
 }
