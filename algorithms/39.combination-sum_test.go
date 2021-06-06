@@ -25,45 +25,45 @@ func Test_combinationSum(t *testing.T) {
 				{7},
 			},
 		},
-		// {
-		// 	args: args{
-		// 		candidates: []int{2, 3, 5},
-		// 		target:     8,
-		// 	},
-		// 	want: [][]int{
-		// 		{2, 2, 2, 2},
-		// 		{2, 3, 3},
-		// 		{3, 5},
-		// 	},
-		// },
-		// {
-		// 	args: args{
-		// 		candidates: []int{2},
-		// 		target:     1,
-		// 	},
-		// 	want: [][]int{},
-		// },
-		// {
-		// 	args: args{
-		// 		candidates: []int{1},
-		// 		target:     1,
-		// 	},
-		// 	want: [][]int{
-		// 		{1},
-		// 	},
-		// },
-		// {
-		// 	args: args{
-		// 		candidates: []int{1},
-		// 		target:     2,
-		// 	},
-		// 	want: [][]int{
-		// 		{1, 1},
-		// 	},
-		// },
+		{
+			args: args{
+				candidates: []int{2, 3, 5},
+				target:     8,
+			},
+			want: [][]int{
+				{2, 2, 2, 2},
+				{2, 3, 3},
+				{3, 5},
+			},
+		},
+		{
+			args: args{
+				candidates: []int{2},
+				target:     1,
+			},
+			want: [][]int{},
+		},
+		{
+			args: args{
+				candidates: []int{1},
+				target:     1,
+			},
+			want: [][]int{
+				{1},
+			},
+		},
+		{
+			args: args{
+				candidates: []int{1},
+				target:     2,
+			},
+			want: [][]int{
+				{1, 1},
+			},
+		},
 	}
 	for _, tt := range tests {
-		if got := combinationSum(tt.args.candidates, tt.args.target); !reflect.DeepEqual(got, tt.want) {
+		if got := combinationSum2(tt.args.candidates, tt.args.target); !reflect.DeepEqual(got, tt.want) {
 			t.Errorf("%q. combinationSum() = %v, want %v", tt.name, got, tt.want)
 		}
 	}
