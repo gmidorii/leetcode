@@ -64,7 +64,10 @@ func Test_combinationSum(t *testing.T) {
 	}
 	for _, tt := range tests {
 		if got := combinationSum2(tt.args.candidates, tt.args.target); !reflect.DeepEqual(got, tt.want) {
-			t.Errorf("%q. combinationSum() = %v, want %v", tt.name, got, tt.want)
+			t.Errorf("%q. combinationSum2() = %v, want %v", tt.name, got, tt.want)
+		}
+		if got := combinationSum3(tt.args.candidates, tt.args.target); !reflect.DeepEqual(got, tt.want) {
+			t.Errorf("%q. combinationSum3() = %v, want %v", tt.name, got, tt.want)
 		}
 	}
 }

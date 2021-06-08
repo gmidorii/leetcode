@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"sort"
 )
 
@@ -70,6 +71,37 @@ func findcombinationSum(nums []int, target, index int, c []int, res *[][]int) {
 		c = append(c, nums[i])
 		findcombinationSum(nums, target-nums[i], i, c, res)
 		// c へ追加した数値を除く
+		c = c[:len(c)-1]
+	}
+}
+
+func combinationSum3(candidates []int, target int) [][]int {
+	if len(candidates) == 0 {
+		return [][]int{}
+	}
+	sort.Ints(candidates)
+	c, res := []int{}, [][]int{}
+	findCombinationSum3(candidates, 0, target, c, &res)
+	return res
+}
+
+func findCombinationSum3(candidates []int, index, target int, c []int, res *[][]int) {
+	if target == 0 {
+		fmt.Printf("c: %v\n", c)
+		fmt.Printf("res: %v\n", res)
+		b := make([]int, len(c))
+		// c のままだと参照が残って、次のループで置き換わってしまう
+		copy(b, c)
+		*res = append(*res, b)
+		fmt.Printf("rres: %v\n", res)
+		return
+	}
+	for i := index; i < len(candidates); i++ {
+		if candidates[i] > target {
+			break
+		}
+		c = append(c, candidates[i])
+		findCombinationSum3(candidates, i, target-candidates[i], c, res)
 		c = c[:len(c)-1]
 	}
 }
